@@ -1,0 +1,87 @@
+[
+    {
+        "outputFile": "C:\\F\\RZP\\rzp-voice-changer.git\\test\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 55,
+                    "endOffset": 106
+                },
+                "from": {
+                    "file": "C:\\F\\RZP\\rzp-voice-changer.git\\test\\app\\src\\main\\res\\values\\strings.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 59,
+                        "endColumn": 55,
+                        "endOffset": 110
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 3,
+                    "startColumn": 4,
+                    "startOffset": 111,
+                    "endColumn": 52,
+                    "endOffset": 159
+                },
+                "from": {
+                    "file": "C:\\F\\RZP\\rzp-voice-changer.git\\test\\app\\src\\main\\res\\values\\strings.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 116,
+                        "endColumn": 52,
+                        "endOffset": 164
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 4,
+                    "startColumn": 4,
+                    "startOffset": 164,
+                    "endLine": 10,
+                    "endColumn": 12,
+                    "endOffset": 455
+                },
+                "from": {
+                    "file": "C:\\F\\RZP\\rzp-voice-changer.git\\test\\app\\src\\main\\res\\values\\styles.xml",
+                    "position": {
+                        "startLine": 6,
+                        "startColumn": 4,
+                        "startOffset": 192,
+                        "endLine": 12,
+                        "endColumn": 12,
+                        "endOffset": 489
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 11,
+                    "startColumn": 4,
+                    "startOffset": 460,
+                    "endLine": 13,
+                    "endColumn": 12,
+                    "endOffset": 615
+                },
+                "from": {
+                    "file": "C:\\F\\RZP\\rzp-voice-changer.git\\test\\app\\src\\main\\res\\values\\styles.xml",
+                    "position": {
+                        "startLine": 15,
+                        "startColumn": 4,
+                        "startOffset": 530,
+                        "endLine": 17,
+                        "endColumn": 12,
+                        "endOffset": 687
+                    }
+                }
+            }
+        ]
+    }
+]
