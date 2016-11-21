@@ -1,0 +1,30 @@
+#Internal package file, do not edit.
+#Mon Nov 21 18:34:34 CET 2016
+2.base=C\:\\F\\RZP\\rzp-voice-changer.git\\test\\app\\build\\intermediates\\transforms\\stripDebugSymbol\\debug\\folders\\2000\\1f\\main
+5.file=C\:\\F\\RZP\\rzp-voice-changer.git\\test\\app\\build\\intermediates\\res\\resources-debug.ap_\\AndroidManifest.xml
+5.set=ANDROID_RESOURCE
+3.base=C\:\\F\\RZP\\rzp-voice-changer.git\\test\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\1f\\main
+6.file=C\:\\F\\RZP\\rzp-voice-changer.git\\test\\app\\build\\intermediates\\res\\resources-debug.ap_\\res\\drawable-xxhdpi-v4\\ic_launcher.png
+2.set=NATIVE_RESOURCE
+4.base=C\:\\F\\RZP\\rzp-voice-changer.git\\test\\app\\build\\intermediates\\transforms\\stripDebugSymbol\\debug\\folders\\2000\\1f\\main
+7.file=C\:\\F\\RZP\\rzp-voice-changer.git\\test\\app\\build\\intermediates\\res\\resources-debug.ap_\\res\\layout\\activity_example.xml
+7.set=ANDROID_RESOURCE
+count=9
+0.file=C\:\\F\\RZP\\rzp-voice-changer.git\\test\\app\\build\\intermediates\\res\\resources-debug.ap_\\resources.arsc
+5.base=C\:\\F\\RZP\\rzp-voice-changer.git\\test\\app\\build\\intermediates\\res\\resources-debug.ap_
+8.file=C\:\\F\\RZP\\rzp-voice-changer.git\\test\\app\\build\\intermediates\\transforms\\stripDebugSymbol\\debug\\folders\\2000\\1f\\main\\lib\\mips\\libsoundtouch.so
+4.set=NATIVE_RESOURCE
+6.base=C\:\\F\\RZP\\rzp-voice-changer.git\\test\\app\\build\\intermediates\\res\\resources-debug.ap_
+1.file=C\:\\F\\RZP\\rzp-voice-changer.git\\test\\app\\build\\intermediates\\transforms\\stripDebugSymbol\\debug\\folders\\2000\\1f\\main\\lib\\x86\\libsoundtouch.so
+1.set=NATIVE_RESOURCE
+7.base=C\:\\F\\RZP\\rzp-voice-changer.git\\test\\app\\build\\intermediates\\res\\resources-debug.ap_
+2.file=C\:\\F\\RZP\\rzp-voice-changer.git\\test\\app\\build\\intermediates\\transforms\\stripDebugSymbol\\debug\\folders\\2000\\1f\\main\\lib\\armeabi-v7a\\libsoundtouch.so
+6.set=ANDROID_RESOURCE
+0.base=C\:\\F\\RZP\\rzp-voice-changer.git\\test\\app\\build\\intermediates\\res\\resources-debug.ap_
+8.base=C\:\\F\\RZP\\rzp-voice-changer.git\\test\\app\\build\\intermediates\\transforms\\stripDebugSymbol\\debug\\folders\\2000\\1f\\main
+3.file=C\:\\F\\RZP\\rzp-voice-changer.git\\test\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\1f\\main\\classes.dex
+3.set=DEX
+1.base=C\:\\F\\RZP\\rzp-voice-changer.git\\test\\app\\build\\intermediates\\transforms\\stripDebugSymbol\\debug\\folders\\2000\\1f\\main
+4.file=C\:\\F\\RZP\\rzp-voice-changer.git\\test\\app\\build\\intermediates\\transforms\\stripDebugSymbol\\debug\\folders\\2000\\1f\\main\\lib\\armeabi\\libsoundtouch.so
+8.set=NATIVE_RESOURCE
+0.set=ANDROID_RESOURCE

@@ -39,7 +39,7 @@ LOCAL_LDLIBS    += -llog
 
 # Custom Flags: 
 # -fvisibility=hidden : don't export all symbols
-LOCAL_CFLAGS += -fvisibility=hidden -I ../../../include -fdata-sections -ffunction-sections
+LOCAL_CFLAGS += -fvisibility=hidden -I ../../include -fdata-sections -ffunction-sections
 
 # OpenMP mode : enable these flags to enable using OpenMP for parallel computation 
 #LOCAL_CFLAGS += -fopenmp
