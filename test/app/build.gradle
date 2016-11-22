@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 19
+    compileSdkVersion 23
     buildToolsVersion "24.0.1"
 
     defaultConfig {
         applicationId "net.surina.soundtouchexample"
-        minSdkVersion 11
-        targetSdkVersion 21
+        minSdkVersion 23
+        targetSdkVersion 23
 
         ndk {
             moduleName "soundtouch"
@@ -25,4 +25,9 @@ android {
             path 'src/main/jni/Android.mk'
         }
     }
+}
+
+dependencies {
+    compile 'com.android.support:appcompat-v7:23.4.0'
+
 }
