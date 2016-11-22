@@ -142,6 +142,10 @@ static void _processFile(SoundTouch *pSoundTouch, const char *inFileName, const 
         {
             nSamples = pSoundTouch->receiveSamples(sampleBuffer, buffSizeSamples);
             outFile.write(sampleBuffer, nSamples * nChannels);
+
+            LOGV("DEBUG 1 %d", buffSizeSamples);
+            LOGV("DEBUG 2 %d", nSamples);
+
         } while (nSamples != 0);
     }
 
@@ -154,6 +158,102 @@ static void _processFile(SoundTouch *pSoundTouch, const char *inFileName, const 
         outFile.write(sampleBuffer, nSamples * nChannels);
     } while (nSamples != 0);
 }
+
+// Processes the sound buffer
+static void _processBuffer(SoundTouch *pSoundTouch, SAMPLETYPE inputBuffer[], SAMPLETYPE outputBuffer[], int bufferSize, int sampleRate, int nChannels)
+{
+
+    assert(nChannels > 0);
+    int buffSizeSamples = bufferSize / nChannels;
+
+
+    // Feed the samples into SoundTouch processor
+    pSoundTouch->putSamples(inputBuffer, buffSizeSamples);
+    // Read ready samples from SoundTouch processor & write them output file.
+    // NOTES:
+    // - 'receiveSamples' doesn't necessarily return any samples at all
+    //   during some rounds!
+    // - On the other hand, during some round 'receiveSamples' may have more
+    //   ready samples than would fit into 'sampleBuffer', and for this reason
+    //   the 'receiveSamples' call is iterated for as many times as it
+    //   outputs samples.
+
+    // Now the input file is processed, yet 'flush' few last samples that are
+    // hiding in the SoundTouch's internal processing pipeline.    int nSamplesWritten = 0;
+
+
+    int nSamplesWritten = 0;
+    int nSamples;
+    int size;
+
+    SAMPLETYPE tempBuffer[BUFF_SIZE];
+
+
+    pSoundTouch->flush();
+
+    do
+    {
+        nSamples = pSoundTouch->receiveSamples(tempBuffer, BUFF_SIZE/2);
+
+        LOGV("DEBUG 1 %d", buffSizeSamples);
+        LOGV("DEBUG 2 %d", nSamplesWritten);
+        LOGV("DEBUG 3 %d", nSamples);
+
+
+        int i;
+        for(i = 0; i< nSamples * 2 && nSamplesWritten<bufferSize*2; i++){
+            outputBuffer[nSamplesWritten++] = tempBuffer[i];
+        }
+    } while (nSamples != 0);
+
+    LOGV("Out try");
+
+}
+
+
+// Processes the sound file 2
+static void _processFile2(SoundTouch *pSoundTouch, const char *inFileName, const char *outFileName)
+{
+    int nSamples;
+    int nChannels;
+    int buffSizeSamples;
+    SAMPLETYPE sampleBuffer[BUFF_SIZE];
+    SAMPLETYPE outputBuffer[BUFF_SIZE];
+
+    // open input file
+    WavInFile inFile(inFileName);
+    int sampleRate = inFile.getSampleRate();
+    int bits = inFile.getNumBits();
+    nChannels = inFile.getNumChannels();
+
+    pSoundTouch->setSampleRate(sampleRate);
+    pSoundTouch->setChannels(nChannels);
+
+    // create output file
+    WavOutFile outFile(outFileName, sampleRate, bits, nChannels);
+
+    assert(nChannels > 0);
+    buffSizeSamples = BUFF_SIZE / nChannels;
+
+    // Process samples read from the input file
+    while (inFile.eof() == 0)
+    {
+        int num;
+
+        // Read a chunk of samples from the input file
+        num = inFile.read(sampleBuffer, BUFF_SIZE);
+        nSamples = num / nChannels;
+
+        _processBuffer(pSoundTouch, sampleBuffer, outputBuffer, num, sampleRate, nChannels);
+
+        outFile.write(outputBuffer, num);
+
+    }
+
+    LOGV("OUT file 2");
+
+}
+
 
 
 
@@ -240,7 +340,7 @@ extern "C" DLL_PUBLIC int Java_net_surina_soundtouch_SoundTouch_processFile(JNIE
 
 	try
 	{
-		_processFile(ptr, inputFile, outputFile);
+		_processFile2(ptr, inputFile, outputFile);
 	}
 	catch (const runtime_error &e)
     {
