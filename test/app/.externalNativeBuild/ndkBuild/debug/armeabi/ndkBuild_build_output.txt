@@ -1,5 +1,0 @@
-md "C:\F\RZP\rzp-voice-changer.git\test\app\build\intermediates\ndkBuild\debug\lib\armeabi" >NUL 2>NUL || rem
-C:/Users/matejv/AppData/Local/Android/Sdk/ndk-bundle/build//../prebuilt/windows-x86_64/bin/echo.exe [armeabi] "Install        ": "libsoundtouch.so => C:\F\RZP\rzp-voice-changer.git\test\app\build\intermediates\ndkBuild\debug\lib/armeabi/libsoundtouch.so"
-copy /b/y "C:\F\RZP\rzp-voice-changer.git\test\app\build\intermediates\ndkBuild\debug\obj\local\armeabi\libsoundtouch.so" "C:\F\RZP\rzp-voice-changer.git\test\app\build\intermediates\ndkBuild\debug\lib\armeabi\libsoundtouch.so" > NUL
-C:/Users/matejv/AppData/Local/Android/Sdk/ndk-bundle/build//../toolchains/arm-linux-androideabi-4.9/prebuilt/windows-x86_64/bin/arm-linux-androideabi-strip --strip-unneeded  C:\F\RZP\rzp-voice-changer.git\test\app\build\intermediates\ndkBuild\debug\lib/armeabi/libsoundtouch.so
-process_begin: CreateProcess(NULL, "", ...) failed.

@@ -1,5 +1,0 @@
-md "C:\F\RZP\rzp-voice-changer.git\test\app\build\intermediates\ndkBuild\debug\lib\mips" >NUL 2>NUL || rem
-C:/Users/matejv/AppData/Local/Android/Sdk/ndk-bundle/build//../prebuilt/windows-x86_64/bin/echo.exe [mips] "Install        ": "libsoundtouch.so => C:\F\RZP\rzp-voice-changer.git\test\app\build\intermediates\ndkBuild\debug\lib/mips/libsoundtouch.so"
-copy /b/y "C:\F\RZP\rzp-voice-changer.git\test\app\build\intermediates\ndkBuild\debug\obj\local\mips\libsoundtouch.so" "C:\F\RZP\rzp-voice-changer.git\test\app\build\intermediates\ndkBuild\debug\lib\mips\libsoundtouch.so" > NUL
-C:/Users/matejv/AppData/Local/Android/Sdk/ndk-bundle/build//../toolchains/mipsel-linux-android-4.9/prebuilt/windows-x86_64/bin/mipsel-linux-android-strip --strip-unneeded  C:\F\RZP\rzp-voice-changer.git\test\app\build\intermediates\ndkBuild\debug\lib/mips/libsoundtouch.so
-process_begin: CreateProcess(NULL, "", ...) failed.

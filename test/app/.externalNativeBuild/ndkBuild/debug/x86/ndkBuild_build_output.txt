@@ -1,5 +1,0 @@
-md "C:\F\RZP\rzp-voice-changer.git\test\app\build\intermediates\ndkBuild\debug\lib\x86" >NUL 2>NUL || rem
-C:/Users/matejv/AppData/Local/Android/Sdk/ndk-bundle/build//../prebuilt/windows-x86_64/bin/echo.exe [x86] "Install        ": "libsoundtouch.so => C:\F\RZP\rzp-voice-changer.git\test\app\build\intermediates\ndkBuild\debug\lib/x86/libsoundtouch.so"
-copy /b/y "C:\F\RZP\rzp-voice-changer.git\test\app\build\intermediates\ndkBuild\debug\obj\local\x86\libsoundtouch.so" "C:\F\RZP\rzp-voice-changer.git\test\app\build\intermediates\ndkBuild\debug\lib\x86\libsoundtouch.so" > NUL
-C:/Users/matejv/AppData/Local/Android/Sdk/ndk-bundle/build//../toolchains/x86-4.9/prebuilt/windows-x86_64/bin/i686-linux-android-strip --strip-unneeded  C:\F\RZP\rzp-voice-changer.git\test\app\build\intermediates\ndkBuild\debug\lib/x86/libsoundtouch.so
-process_begin: CreateProcess(NULL, "", ...) failed.
