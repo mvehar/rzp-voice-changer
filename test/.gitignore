@@ -1,3 +1,4 @@
-build/
-.externalNativeBuild/
+app/build/
+app/.externalNativeBuild/
 .gradle/
+.idea/
