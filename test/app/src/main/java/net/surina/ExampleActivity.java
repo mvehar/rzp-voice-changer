@@ -14,10 +14,6 @@
 
 package net.surina;
 
-import java.io.File;
-
-import net.surina.soundtouch.SoundTouch;
-import net.surina.soundtouchexample.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
@@ -31,6 +27,11 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import net.surina.soundtouch.SoundTouch;
+import net.surina.soundtouchexample.R;
+
+import java.io.File;
 
 public class ExampleActivity extends Activity implements OnClickListener 
 {

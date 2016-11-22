@@ -160,7 +160,7 @@ static void _processFile(SoundTouch *pSoundTouch, const char *inFileName, const 
 }
 
 // Processes the sound buffer
-static void _processBuffer(SoundTouch *pSoundTouch, SAMPLETYPE inputBuffer[], SAMPLETYPE outputBuffer[], int bufferSize, int sampleRate, int nChannels)
+static void _processBuffer(SoundTouch *pSoundTouch, SAMPLETYPE inputBuffer[], SAMPLETYPE outputBuffer[], int bufferSize, int nChannels)
 {
 
     assert(nChannels > 0);
@@ -189,13 +189,13 @@ static void _processBuffer(SoundTouch *pSoundTouch, SAMPLETYPE inputBuffer[], SA
     SAMPLETYPE tempBuffer[BUFF_SIZE];
 
 
-    pSoundTouch->flush();
+    //pSoundTouch->flush();
 
     do
     {
         nSamples = pSoundTouch->receiveSamples(tempBuffer, BUFF_SIZE/2);
 
-        LOGV("DEBUG 1 %d", buffSizeSamples);
+        LOGV("DEBUG 1 %d", sizeof(tempBuffer));
         LOGV("DEBUG 2 %d", nSamplesWritten);
         LOGV("DEBUG 3 %d", nSamples);
 
@@ -207,6 +207,69 @@ static void _processBuffer(SoundTouch *pSoundTouch, SAMPLETYPE inputBuffer[], SA
     } while (nSamples != 0);
 
     LOGV("Out try");
+
+}
+
+//Fill in samples
+static void _processSamples(SoundTouch *pSoundTouch, SAMPLETYPE inputBuffer[], int bufferSize, int nChannels)
+{
+    assert(nChannels > 0);
+    int buffSizeSamples = bufferSize / nChannels;
+
+    pSoundTouch->putSamples(inputBuffer, buffSizeSamples);
+}
+//Retrieve processed samples
+static int _retieveSamples(SoundTouch *pSoundTouch, SAMPLETYPE outputBuffer[], int bufferSize, int nChannels)
+{
+
+    assert(nChannels > 0);
+    int buffSizeSamples = bufferSize / nChannels;
+
+    int nSamplesWritten = 0;
+    int nSamples;
+
+    SAMPLETYPE tempBuffer[BUFF_SIZE];
+
+    //pSoundTouch->flush();
+
+    do
+    {
+        nSamples = pSoundTouch->receiveSamples(tempBuffer, buffSizeSamples);
+
+        int i;
+        for(i = 0; i< nSamples*2 && nSamplesWritten<bufferSize*2; i++){
+            outputBuffer[nSamplesWritten++] = tempBuffer[i];
+        }
+    } while (nSamples != 0);
+
+    return nSamplesWritten;
+}
+
+//Retrieve processed samples
+static int _retieveSamplesFlush(SoundTouch *pSoundTouch, SAMPLETYPE outputBuffer[], int bufferSize, int nChannels)
+{
+
+    assert(nChannels > 0);
+    int buffSizeSamples = bufferSize / nChannels;
+
+    int nSamplesWritten = 0;
+    int nSamples;
+
+    SAMPLETYPE tempBuffer[BUFF_SIZE];
+
+    //pSoundTouch->flush();
+
+    do
+    {
+        nSamples = pSoundTouch->receiveSamples(tempBuffer, buffSizeSamples);
+
+        int i;
+        for(i = 0; i< nSamples*2 && nSamplesWritten<bufferSize*2; i++){
+            outputBuffer[nSamplesWritten++] = tempBuffer[i];
+        }
+    } while (nSamples != 0);
+
+    return nSamplesWritten;
 
 }
 
@@ -240,15 +303,20 @@ static void _processFile2(SoundTouch *pSoundTouch, const char *inFileName, const
     {
         int num;
 
+
         // Read a chunk of samples from the input file
         num = inFile.read(sampleBuffer, BUFF_SIZE);
-        nSamples = num / nChannels;
+        LOGV("%d",num);
 
-        _processBuffer(pSoundTouch, sampleBuffer, outputBuffer, num, sampleRate, nChannels);
 
-        outFile.write(outputBuffer, num);
+        _processSamples(pSoundTouch, sampleBuffer, num, nChannels);
+        nSamples = _retieveSamplesFlush(pSoundTouch, outputBuffer, num, nChannels);
+        outFile.write(outputBuffer, nSamples);
 
     }
+
+    _retieveSamplesFlush(pSoundTouch, outputBuffer, BUFF_SIZE, nChannels);
+    outFile.write(outputBuffer, BUFF_SIZE*2);
 
     LOGV("OUT file 2");
 
@@ -357,3 +425,4 @@ extern "C" DLL_PUBLIC int Java_net_surina_soundtouch_SoundTouch_processFile(JNIE
 
 	return 0;
 }
+

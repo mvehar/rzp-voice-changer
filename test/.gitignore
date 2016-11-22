@@ -2,3 +2,6 @@ app/build/
 app/.externalNativeBuild/
 .gradle/
 .idea/
+**/*.class
+**/*.o
+**/*.o.d
