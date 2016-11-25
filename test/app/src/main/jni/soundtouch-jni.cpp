@@ -195,11 +195,6 @@ static void _processBuffer(SoundTouch *pSoundTouch, SAMPLETYPE inputBuffer[], SA
     {
         nSamples = pSoundTouch->receiveSamples(tempBuffer, BUFF_SIZE/2);
 
-        LOGV("DEBUG 1 %d", sizeof(tempBuffer));
-        LOGV("DEBUG 2 %d", nSamplesWritten);
-        LOGV("DEBUG 3 %d", nSamples);
-
-
         int i;
         for(i = 0; i< nSamples * 2 && nSamplesWritten<bufferSize*2; i++){
             outputBuffer[nSamplesWritten++] = tempBuffer[i];
@@ -211,7 +206,7 @@ static void _processBuffer(SoundTouch *pSoundTouch, SAMPLETYPE inputBuffer[], SA
 }
 
 //Fill in samples
-static void _processSamples(SoundTouch *pSoundTouch, SAMPLETYPE inputBuffer[], int bufferSize, int nChannels)
+static void _processSamples(SoundTouch *pSoundTouch, SAMPLETYPE *inputBuffer, int bufferSize, int nChannels)
 {
     assert(nChannels > 0);
     int buffSizeSamples = bufferSize / nChannels;
@@ -246,7 +241,7 @@ static int _retieveSamples(SoundTouch *pSoundTouch, SAMPLETYPE outputBuffer[], i
 }
 
 //Retrieve processed samples
-static int _retieveSamplesFlush(SoundTouch *pSoundTouch, SAMPLETYPE outputBuffer[], int bufferSize, int nChannels)
+static int _retieveSamplesFlush(SoundTouch *pSoundTouch, SAMPLETYPE *outputBuffer, int bufferSize, int nChannels)
 {
 
     assert(nChannels > 0);
@@ -257,7 +252,7 @@ static int _retieveSamplesFlush(SoundTouch *pSoundTouch, SAMPLETYPE outputBuffer
 
     SAMPLETYPE tempBuffer[BUFF_SIZE];
 
-    //pSoundTouch->flush();
+    pSoundTouch->flush();
 
     do
     {
@@ -270,7 +265,6 @@ static int _retieveSamplesFlush(SoundTouch *pSoundTouch, SAMPLETYPE outputBuffer
     } while (nSamples != 0);
 
     return nSamplesWritten;
-
 }
 
 
@@ -290,7 +284,6 @@ static void _processFile2(SoundTouch *pSoundTouch, const char *inFileName, const
     nChannels = inFile.getNumChannels();
 
     pSoundTouch->setSampleRate(sampleRate);
-    pSoundTouch->setChannels(nChannels);
 
     // create output file
     WavOutFile outFile(outFileName, sampleRate, bits, nChannels);
@@ -310,7 +303,7 @@ static void _processFile2(SoundTouch *pSoundTouch, const char *inFileName, const
 
 
         _processSamples(pSoundTouch, sampleBuffer, num, nChannels);
-        nSamples = _retieveSamplesFlush(pSoundTouch, outputBuffer, num, nChannels);
+        nSamples = _retieveSamples(pSoundTouch, outputBuffer, num, nChannels);
         outFile.write(outputBuffer, nSamples);
 
     }
@@ -384,6 +377,18 @@ extern "C" DLL_PUBLIC void Java_net_surina_soundtouch_SoundTouch_setSpeed(JNIEnv
 	ptr->setRate(speed);
 }
 
+extern "C" DLL_PUBLIC void Java_net_surina_soundtouch_SoundTouch_setSampleRate(JNIEnv *env, jobject thiz, jlong handle, jint rate)
+{
+    SoundTouch *ptr = (SoundTouch*)handle;
+    ptr->setSampleRate(rate);
+}
+
+extern "C" DLL_PUBLIC void Java_net_surina_soundtouch_SoundTouch_setChannels(JNIEnv *env, jobject thiz, jlong handle, jint n)
+{
+    SoundTouch *ptr = (SoundTouch*)handle;
+    ptr->setChannels(n);
+}
+
 
 extern "C" DLL_PUBLIC jstring Java_net_surina_soundtouch_SoundTouch_getErrorString(JNIEnv *env, jobject thiz)
 {
@@ -425,4 +430,46 @@ extern "C" DLL_PUBLIC int Java_net_surina_soundtouch_SoundTouch_processFile(JNIE
 
 	return 0;
 }
+
+extern "C" DLL_PUBLIC JNIEXPORT jfloatArray JNICALL Java_net_surina_soundtouch_SoundTouch_processSamples(JNIEnv *env, jobject thiz, jlong handle, jfloatArray inputSamples, jint nChannels)
+{
+    SoundTouch *ptr = (SoundTouch*)handle;
+
+    int sampleCount = env->GetArrayLength(inputSamples);
+    float* samples = env->GetFloatArrayElements(inputSamples,0);
+
+    float* outputSamples;
+    int outputCount;
+
+    outputSamples = (float*) malloc(sizeof(float) * sampleCount);
+
+
+    LOGV("Processing samples %d", sampleCount);
+
+    /// gomp_tls storage bug workaround - see comments in _init_threading() function!
+    if (_init_threading(true)) return NULL;
+
+    try
+    {
+        _processSamples(ptr,(SAMPLETYPE*) samples, sampleCount,nChannels);
+        outputCount = _retieveSamples(ptr, (SAMPLETYPE*) outputSamples, sampleCount,nChannels);
+        LOGV("Processed %d samples", outputCount);
+    }
+    catch (const runtime_error &e)
+    {
+        const char *err = e.what();
+        // An exception occurred during processing, return the error message
+        LOGV("JNI exception in SoundTouch::processFile: %s", err);
+        _setErrmsg(err);
+        return NULL;
+    }
+
+    jfloatArray result;
+    result = env->NewFloatArray(outputCount);
+    env->SetFloatArrayRegion(result, 0, outputCount, outputSamples);
+    free(outputSamples);
+    return result;
+
+}
+
 

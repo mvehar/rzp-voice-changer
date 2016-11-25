@@ -5,12 +5,14 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
+
     <Button
         android:text="Record"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/buttonRecord"
-        android:onClick="onClick" />
+        android:onClick="onClick"
+        android:layout_weight="0.02" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -59,6 +61,7 @@
             android:onClick="onClick"
             android:enabled="false"
             android:editable="false" />
+
     </LinearLayout>
 
     <TextView
@@ -71,13 +74,16 @@
     <ScrollView
         android:id="@+id/scrollView1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:layout_weight="0.04">
 
         <TextView
         android:id="@+id/textViewResult"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:text="@string/hello_world" />
+
+
 
 
     </ScrollView>

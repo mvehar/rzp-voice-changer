@@ -15,10 +15,10 @@ import java.io.IOException;
  */
 
 public class AudioRecording {
-    private static final int RECORDER_BPP = 16;
-    private static final int RECORDER_SAMPLERATE = 44100;
-    private static final int RECORDER_CHANNELS = AudioFormat.CHANNEL_IN_STEREO;
-    private static final int RECORDER_AUDIO_ENCODING = AudioFormat.ENCODING_PCM_16BIT;
+    static final int RECORDER_BPP = 16;
+    static final int RECORDER_SAMPLERATE = 44100;
+    static final int RECORDER_CHANNELS = AudioFormat.CHANNEL_IN_STEREO;
+    static final int RECORDER_AUDIO_ENCODING = AudioFormat.ENCODING_PCM_16BIT;
 
     private static final String TMP = ".tmp";
 
@@ -44,8 +44,8 @@ public class AudioRecording {
         try {
             f.createNewFile();
             ftmp.createNewFile();
-            System.out.println("Problemsss");
         } catch (IOException e) {
+            System.out.println("Problemsss");
             e.printStackTrace();
         }
 

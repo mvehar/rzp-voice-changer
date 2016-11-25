@@ -65,7 +65,7 @@ namespace soundtouch
 {
     /// Activate these undef's to overrule the possible sampletype 
     /// setting inherited from some other header file:
-    //#undef SOUNDTOUCH_INTEGER_SAMPLES
+    #undef SOUNDTOUCH_INTEGER_SAMPLES
     //#undef SOUNDTOUCH_FLOAT_SAMPLES
 
     /// If following flag is defined, always uses multichannel processing 
