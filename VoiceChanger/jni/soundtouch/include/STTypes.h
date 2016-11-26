@@ -8,10 +8,10 @@
 ///
 ////////////////////////////////////////////////////////////////////////////////
 //
-// Last changed  : $Date: 2012-12-28 16:53:56 +0200 (Fri, 28 Dec 2012) $
+// Last changed  : $Date: 2015-05-18 18:25:07 +0300 (Mon, 18 May 2015) $
 // File revision : $Revision: 3 $
 //
-// $Id: STTypes.h 162 2012-12-28 14:53:56Z oparviai $
+// $Id: STTypes.h 215 2015-05-18 15:25:07Z oparviai $
 //
 ////////////////////////////////////////////////////////////////////////////////
 //
@@ -60,25 +60,22 @@ typedef unsigned long   ulong;
     #include "soundtouch_config.h"
 #endif
 
-#ifndef _WINDEF_
-    // if these aren't defined already by Windows headers, define now
-
-    typedef int BOOL;
-
-    #define FALSE   0
-    #define TRUE    1
-
-#endif  // _WINDEF_
-
 
 namespace soundtouch
 {
     /// Activate these undef's to overrule the possible sampletype 
     /// setting inherited from some other header file:
-    //#undef SOUNDTOUCH_INTEGER_SAMPLES
+    #undef SOUNDTOUCH_INTEGER_SAMPLES
     //#undef SOUNDTOUCH_FLOAT_SAMPLES
 
-    #if (defined(__SOFTFP__))
+    /// If following flag is defined, always uses multichannel processing 
+    /// routines also for mono and stero sound. This is for routine testing 
+    /// purposes; output should be same with either routines, yet disabling 
+    /// the dedicated mono/stereo processing routines will result in slower 
+    /// runtime performance so recommendation is to keep this off.
+    // #define USE_MULTICH_ALWAYS
+
+    #if (defined(__SOFTFP__) && defined(ANDROID))
         // For Android compilation: Force use of Integer samples in case that
         // compilation uses soft-floating point emulation - soft-fp is way too slow
         #undef  SOUNDTOUCH_FLOAT_SAMPLES
@@ -175,6 +172,7 @@ namespace soundtouch
 #else
     // use c++ standard exceptions
     #include <stdexcept>
+    #include <string>
     #define ST_THROW_RT_ERROR(x)    {throw std::runtime_error(x);}
 #endif
 

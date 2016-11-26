@@ -1,5 +1,6 @@
 <resources>
 
-    <string name="app_name">SoundTouch-Android</string>
+    <string name="app_name">Voice Changer</string>
+    <string name="hello_world">Ready</string>
 
 </resources>

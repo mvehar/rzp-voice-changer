@@ -5,28 +5,34 @@ import android.media.AudioManager;
 import android.media.AudioRecord;
 import android.media.AudioTrack;
 import android.media.MediaRecorder;
-import android.util.Log;
 
-import net.surina.soundtouch.SoundTouch;
+import com.vehar.soundtouchandroid.SoundTouch;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by matejv on 22.11.2016.
  */
 
-public class AudioStreaming {
-    private static final int RECORDER_BPP = 16;
-    private static final int RECORDER_SAMPLERATE = 44100;
-    private static final int RECORDER_CHANNELS = AudioFormat.CHANNEL_IN_STEREO;
-    private static final int RECORDER_AUDIO_ENCODING = AudioFormat.ENCODING_PCM_FLOAT;
-
+public class AudioStreaming  {
+    static final int RECORDER_BPP = 16;
+    static final int RECORDER_SAMPLERATE = 44100;
+    static final int RECORDER_CHANNELS = AudioFormat.CHANNEL_IN_STEREO;
+    static final int RECORDER_AUDIO_ENCODING = AudioFormat.ENCODING_PCM_16BIT;
 
     private AudioRecord recorder = null;
-    AudioTrack track = null;
+    private AudioTrack track = null;
+
+    private SoundTouch st = null;
     private Thread recordingThread = null;
     private boolean isRecording = false;
 
+    private List<Byte> SOUNDS = new ArrayList<>();
+    private List<Byte> PROC_SOUNDS = new ArrayList<>();
 
-    int BufferElements2Rec = 2048; // want to play 2048 (2K) since 2 bytes we use only 1024
+
+    int BufferElements2Rec = 4096; // want to play 2048 (2K) since 2 bytes we use only 1024
     int BytesPerElement = 2; // 2 bytes in 16bit format
     int bufferSize = 0;
 
@@ -35,20 +41,24 @@ public class AudioStreaming {
         bufferSize = AudioRecord.getMinBufferSize(RECORDER_SAMPLERATE,
                 RECORDER_CHANNELS, RECORDER_AUDIO_ENCODING);
 
-        track = new AudioTrack(AudioManager.STREAM_MUSIC, RECORDER_SAMPLERATE , RECORDER_CHANNELS, RECORDER_AUDIO_ENCODING, BufferElements2Rec * BytesPerElement, AudioTrack.MODE_STREAM);
+        track = new AudioTrack(AudioManager.STREAM_MUSIC, RECORDER_SAMPLERATE , RECORDER_CHANNELS,
+                RECORDER_AUDIO_ENCODING, BufferElements2Rec * BytesPerElement, AudioTrack.MODE_STREAM);
 
-
-        //TODO : Streaming server init
+        st = new SoundTouch(0,2,RECORDER_SAMPLERATE,2,1.0f,5);
 
     }
 
-    public void startRecording() {
+    public void startRecording(int pitch) {
 
         recorder = new AudioRecord(MediaRecorder.AudioSource.MIC,
                 RECORDER_SAMPLERATE, RECORDER_CHANNELS,
                 RECORDER_AUDIO_ENCODING, BufferElements2Rec * BytesPerElement);
 
-        track.play();
+        st = new SoundTouch(0,2,RECORDER_SAMPLERATE,BytesPerElement,1.0f,pitch);
+
+
+        SOUNDS.clear();
+        PROC_SOUNDS.clear();
 
         recorder.startRecording();
 
@@ -58,7 +68,7 @@ public class AudioStreaming {
 
             public void run() {
 
-                processAndStream();
+                getAudioData();
 
             }
         }, "AudioRecorder Thread");
@@ -75,94 +85,85 @@ public class AudioStreaming {
             recorder.stop();
             recorder.release();
 
-            track.stop();
-
             recorder = null;
             recordingThread = null;
         }
-
     }
 
-    //Conversion of short to byte
-    private byte[] short2byte(short[] sData) {
-        int shortArrsize = sData.length;
-        byte[] bytes = new byte[shortArrsize * 2];
+    public void playOriginal(){
+        track.stop();
+        track.flush();
 
-        for (int i = 0; i < shortArrsize; i++) {
-            bytes[i * 2] = (byte) (sData[i] & 0x00FF);
-            bytes[(i * 2) + 1] = (byte) (sData[i] >> 8);
-            sData[i] = 0;
+        byte[] sound = new byte[SOUNDS.size()];
+        for(int i=0;i<sound.length;i++){
+            sound[i] = SOUNDS.get(i);
         }
-        return bytes;
+        track.play();
+        track.write(sound,0,sound.length);
+
     }
 
-    private void processAndStream() {
+    public void playProcessed(){
+        track.stop();
+        track.flush();
+
+
+        st.finish();
+
+        byte[] processed = new byte[BufferElements2Rec];
+        int st_proc  = 0;
+        do {
+            st_proc = st.getBytes(processed);
+            for(int i=0;i<st_proc;i++){
+                PROC_SOUNDS.add(processed[i]);
+            }
+        }while(st_proc!=0);
+
+
+        byte[] sound = new byte[PROC_SOUNDS.size()];
+        for(int i=0;i<PROC_SOUNDS.size();i++){
+            sound[i] = PROC_SOUNDS.get(i);
+        }
+        track.play();
+        track.write(sound,0,sound.length);
+
+    }
+
+    public void stop(){
+        track.stop();
+        track.flush();
+
+    }
+
+    private void getAudioData() {
         // Write the output audio in byte
-        float sData[] = new float[BufferElements2Rec * BytesPerElement];
-        float processedData[] = new float[BufferElements2Rec * BytesPerElement];
+        byte sData[] = new byte[BufferElements2Rec];
 
-        SoundTouch st = new SoundTouch();
-        st.setTempo(100);
-        st.setPitchSemiTones(0);
-        st.setSampleRate(RECORDER_SAMPLERATE);
-        st.setChannels(2);
-
-
-
-//        FileOutputStream os = null;
-//        try {
-//            os = new FileOutputStream(FILE + TMP);
-//        } catch (F=ileNotFoundException e) {
-//            e.printStackTrace();
-//        }
+        track.play();
 
         while (isRecording) {
             // gets the voice output from microphone to byte format
-            recorder.read(sData, 0, BufferElements2Rec,AudioRecord.READ_BLOCKING);
+            recorder.read(sData, 0, BufferElements2Rec);
 
-            //TODO: Process
-            float data[] = process(st, sData);
+            // track.write(sData,0,BufferElements2Rec);
 
-
-            //TODO: Send / Play
-            if(data != null){
-                track.write(data, 0, data.length,AudioTrack.WRITE_NON_BLOCKING);
-
+            //Copy to array
+            for(int i=0;i<BufferElements2Rec;i++){
+                SOUNDS.add(sData[i]);
             }
 
-//
-//            try {
-//                // writes the data to file from buffer stores the voice buffer
-//                byte bData[] = short2byte(sData);
-//
-////                os.write(bData, 0, BufferElements2Rec * BytesPerElement);
-//
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
+            st.putBytes(sData);
+
+            int st_proc = st.getBytes(sData);
+            //track.write(sData,0,st_proc);
+
+            for(int i=0;i<st_proc;i++){
+                PROC_SOUNDS.add(sData[i]);
+            }
+
         }
-
-
 
     }
 
-    protected float[] process(SoundTouch st, float[] input ) {
-        float[] out = null;
-        try {
-
-            long startTime = System.currentTimeMillis();
-            out = st.processSamples(input, 2);
-            long endTime = System.currentTimeMillis();
-            float duration = (endTime - startTime) * 0.001f;
-
-            Log.i("SoundTouch", "process file done, duration = " + duration);
-
-
-        } catch (Exception exp) {
-            exp.printStackTrace();
-        }
-
-        return out;
-    }
 
 }

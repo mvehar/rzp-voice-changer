@@ -1,6 +1,6 @@
 dnl SoundTouch configure.ac, by David W. Durham
 dnl
-dnl $Id: configure.ac 141 2012-04-04 19:47:28Z oparviai $
+dnl $Id: configure.ac 230 2015-09-20 07:38:32Z oparviai $
 dnl
 dnl This file is part of SoundTouch, an audio processing library for pitch/time adjustments
 dnl 
@@ -19,10 +19,16 @@ dnl this program; if not, write to the Free Software Foundation, Inc., 59 Temple
 dnl Place - Suite 330, Boston, MA  02111-1307, USA
 # Process this file with autoconf to produce a configure script.
 
-AC_INIT(SoundTouch, 1.7.0, [http://www.surina.net/soundtouch])
+AC_INIT([SoundTouch], [1.9.2], [http://www.surina.net/soundtouch])
+dnl Default to libSoundTouch.so.$LIB_SONAME.0.0
+LIB_SONAME=1
+AC_SUBST(LIB_SONAME)
+
 AC_CONFIG_AUX_DIR(config)
-AM_CONFIG_HEADER([include/soundtouch_config.h])
+AC_CONFIG_MACRO_DIR([config/m4])
+AM_CONFIG_HEADER([config.h include/soundtouch_config.h])
 AM_INIT_AUTOMAKE
+AM_SILENT_RULES([yes])
 #AC_DISABLE_SHARED	dnl This makes libtool only build static libs 
 AC_DISABLE_STATIC	dnl This makes libtool only build shared libs
 #AC_GNU_SOURCE 		dnl enable posix extensions in glibc
@@ -77,9 +83,14 @@ AC_C_INLINE
 AC_ARG_ENABLE(integer-samples,
               [AC_HELP_STRING([--enable-integer-samples],
                               [use integer samples instead of floats
-[default=yes]])],,
+[default=no]])],,
               [enable_integer_samples=no])
 
+
+AC_ARG_ENABLE(openmp,
+              [AC_HELP_STRING([--enable-openmp],
+                              [use parallel multicore calculation through OpenMP [default=no]])],,
+              [enable_openmp=no])
 
 # Let the user enable/disable the x86 optimizations.
 # Useful when compiling on non-x86 architectures.
@@ -104,14 +115,21 @@ else
 fi
 
 
+if test "x$enable_openmp" = "xyes"; then
+        echo "****** openmp optimizations enabled ******"
+        AM_CXXFLAGS="-fopenmp $AM_CXXFLAGS"
+else
+        echo "****** openmp optimizations disabled ******"
+fi
+
+
 # Check if optimizations are supported in the system at build time.
 if test "x$enable_x86_optimizations" = "xyes" -a "x$ac_cv_header_cpuid_h" = "xyes"; then
         echo "****** x86 optimizations enabled ******"
 
 	original_saved_CXXFLAGS=$CXXFLAGS
 	have_mmx_intrinsics=no
-	OPT_CXXFLAGS="-mmmx -Winline"
-	CXXFLAGS="$OPT_CXXFLAGS $CXXFLAGS"
+	CXXFLAGS="-mmmx -Winline $CXXFLAGS"
 
 	# Check if the user can compile MMX code using intrinsics.
 	# GCC supports MMX intrinsics since version 3.3
@@ -137,14 +155,15 @@ if test "x$enable_x86_optimizations" = "xyes" -a "x$ac_cv_header_cpuid_h" = "xye
 		echo "****** No MMX support found ******"
 		if test "x$enable_integer_samples" = "xyes"; then
 		        echo "****** Disabling optimizations. Using integer samples with no MMX support ******"
-		        AC_DEFINE([SOUNDTOUCH_DISABLE_X86_OPTIMIZATIONS],[1],[Do not use x86 optimizations])
+		        CPPFLAGS="-DSOUNDTOUCH_DISABLE_X86_OPTIMIZATIONS $CPPFLAGS"
 		fi
 	fi
 
 
+	# SSE support
+	original_saved_CXXFLAGS=$CXXFLAGS
 	have_sse_intrinsics=no
-	OPT_CXXFLAGS="-msse -Winline"
-	CXXFLAGS="$OPT_CXXFLAGS $CXXFLAGS"
+	CXXFLAGS="-msse -Winline $CXXFLAGS"
 
 	# Check if the user can compile SSE code using intrinsics.
 	# GCC supports SSE intrinsics since version 3.3
@@ -170,15 +189,22 @@ if test "x$enable_x86_optimizations" = "xyes" -a "x$ac_cv_header_cpuid_h" = "xye
 		echo "****** No SSE support found ******"
 		if test "x$enable_integer_samples" != "xyes"; then
 		        echo "****** Disabling optimizations. Using float samples with no SSE support ******"
-		        AC_DEFINE([SOUNDTOUCH_DISABLE_X86_OPTIMIZATIONS],[1],[Do not use x86 optimizations])
+		        CPPFLAGS="-DSOUNDTOUCH_DISABLE_X86_OPTIMIZATIONS $CPPFLAGS"
 		fi
 	fi
 
 else
 	# Disable optimizations in SSTypes.h since the user requested it.
         echo "****** x86 optimizations disabled ******"
-        AC_DEFINE([SOUNDTOUCH_DISABLE_X86_OPTIMIZATIONS],[1],[Do not use x86 optimizations])
+        CPPFLAGS="-DSOUNDTOUCH_DISABLE_X86_OPTIMIZATIONS $CPPFLAGS"
 fi
+
+# Set AM_CXXFLAGS
+AC_SUBST([AM_CXXFLAGS], [$AM_CXXFLAGS])
+
+# Empty default CXXFLAGS so user can set them if desirable
+#AC_SUBST([CXXFLAGS], [ ])
+
 
 # SSTypes.h by default enables optimizations. Those already got disabled if
 # the user requested for it or if the system does not support them.

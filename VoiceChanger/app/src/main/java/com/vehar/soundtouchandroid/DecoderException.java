@@ -1,4 +1,4 @@
-package com.smp.soundtouchandroid;
+package com.vehar.soundtouchandroid;
 
 public class DecoderException extends RuntimeException
 {

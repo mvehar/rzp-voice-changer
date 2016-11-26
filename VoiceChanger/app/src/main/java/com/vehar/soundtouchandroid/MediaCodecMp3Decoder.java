@@ -1,7 +1,4 @@
-package com.smp.soundtouchandroid;
-
-import java.io.IOException;
-import java.nio.ByteBuffer;
+package com.vehar.soundtouchandroid;
 
 import android.annotation.SuppressLint;
 import android.media.MediaCodec;
@@ -9,7 +6,9 @@ import android.media.MediaCodec.BufferInfo;
 import android.media.MediaExtractor;
 import android.media.MediaFormat;
 import android.util.Log;
-import static com.smp.soundtouchandroid.Constants.*;
+
+import java.io.IOException;
+import java.nio.ByteBuffer;
 
 @SuppressLint("NewApi")
 public class MediaCodecMp3Decoder implements Mp3Decoder

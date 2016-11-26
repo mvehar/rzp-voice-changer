@@ -5,11 +5,11 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <vector>
+#include <soundtouch/include/SoundTouch.h>
 
 //#include <stdio.h>
 //#include <dlfcn.h>
 
-#include "soundtouch/include/SoundTouch.h"
 //#include "TimeShiftEffect.h"
 
 #define LOGV(...)   __android_log_print((int)ANDROID_LOG_INFO, "SOUNDTOUCH", __VA_ARGS__)
@@ -64,7 +64,7 @@ static int putQueueInChar(jbyte*, queue<signed char>*, int);
 
 #ifdef __cplusplus
 
-extern "C" DLL_PUBLIC void Java_com_smp_soundtouchandroid_SoundTouch_clearBytes(JNIEnv *env,
+extern "C" DLL_PUBLIC void Java_com_vehar_soundtouchandroid_SoundTouch_clearBytes(JNIEnv *env,
 	jobject thiz, jint track)
 {
 	SoundTouchExt& soundTouch = sProcessors.at(track);
@@ -85,14 +85,14 @@ extern "C" DLL_PUBLIC void Java_com_smp_soundtouchandroid_SoundTouch_clearBytes(
 	}
 }
 
-extern "C" DLL_PUBLIC void Java_com_smp_soundtouchandroid_SoundTouch_setup(JNIEnv *env,
+extern "C" DLL_PUBLIC void Java_com_vehar_soundtouchandroid_SoundTouch_setup(JNIEnv *env,
 	jobject thiz, jint track, jint channels, jint samplingRate, jint bytesPerSample, jfloat tempo, jint pitchSemi)
 {
 	SoundTouchExt& soundTouch = sProcessors.at(track);
 	setup(soundTouch, channels, samplingRate, bytesPerSample, tempo, pitchSemi);
 }
 
-extern "C" DLL_PUBLIC void Java_com_smp_soundtouchandroid_SoundTouch_finish(JNIEnv *env,
+extern "C" DLL_PUBLIC void Java_com_vehar_soundtouchandroid_SoundTouch_finish(JNIEnv *env,
 	jobject thiz, jint track,
 	int length)
 {
@@ -109,7 +109,7 @@ extern "C" DLL_PUBLIC void Java_com_smp_soundtouchandroid_SoundTouch_finish(JNIE
 	delete[] fBufferIn;
 	fBufferIn = NULL;
 }
-extern "C" DLL_PUBLIC void Java_com_smp_soundtouchandroid_SoundTouch_putBytes(JNIEnv *env,
+extern "C" DLL_PUBLIC void Java_com_vehar_soundtouchandroid_SoundTouch_putBytes(JNIEnv *env,
 	jobject thiz,
 	jint track,
 	jbyteArray input,
@@ -117,7 +117,7 @@ extern "C" DLL_PUBLIC void Java_com_smp_soundtouchandroid_SoundTouch_putBytes(JN
 {
 
 	SoundTouchExt& soundTouch = sProcessors.at(track);
-	
+
 	const int bytesPerSample = soundTouch.bytesPerSample;
 	const int BUFF_SIZE = length / bytesPerSample;
 
@@ -130,17 +130,17 @@ extern "C" DLL_PUBLIC void Java_com_smp_soundtouchandroid_SoundTouch_putBytes(JN
 	SAMPLETYPE* fBufferIn = new SAMPLETYPE[BUFF_SIZE];
 
 	//converts the chars to floats (16-bit only).
-	convertInput16(ar, fBufferIn, BUFF_SIZE);
+	convertInput16(ar, (float*)fBufferIn, BUFF_SIZE);
 
 	process(soundTouch, fBufferIn, fBufferOut, BUFF_SIZE, false); //audio is ongoing.
 
 	env->ReleaseByteArrayElements(input, ar, JNI_ABORT);
-	
+
 	delete[] fBufferIn;
 	fBufferIn = NULL;
 }
 
-extern "C" DLL_PUBLIC jint Java_com_smp_soundtouchandroid_SoundTouch_getBytes(JNIEnv *env,
+extern "C" DLL_PUBLIC jint Java_com_vehar_soundtouchandroid_SoundTouch_getBytes(JNIEnv *env,
 	jobject thiz, jint track, jbyteArray get, jint toGet)
 {
 	queue<signed char>* fBufferOut = sProcessors.at(track).fBufferOut;
@@ -207,7 +207,7 @@ static int process(SoundTouchExt& soundTouch, SAMPLETYPE* fBufferIn, queue<signe
 	do
 	{
 		nSamples = sTouch->receiveSamples(fBufferIn, buffSizeSamples);
-		processed += write(fBufferIn, fBufferOut, nSamples * channels, bytesPerSample);
+		processed += write((float*)fBufferIn, fBufferOut, nSamples * channels, bytesPerSample);
 	} while (nSamples != 0);
 
 	return processed;

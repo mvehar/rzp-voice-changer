@@ -1,6 +1,6 @@
 
-package com.smp.soundtouchandroid;
-import static com.smp.soundtouchandroid.Constants.*;
+package com.vehar.soundtouchandroid;
+import static com.vehar.soundtouchandroid.Constants.*;
 public class SoundTouch
 {
 	

@@ -1,4 +1,4 @@
-# Copyright (C) 2010 The Android Open Source Project
+# Copyright (C) 2010 The Android Open  Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,21 +21,32 @@ include $(CLEAR_VARS)
 # *** Remember: Change -O0 into -O2 in add-applications.mk ***
 
 LOCAL_MODULE    := soundtouch
-LOCAL_SRC_FILES := soundtouch-jni.cpp soundtouch/source/SoundTouch/AAFilter.cpp  soundtouch/source/SoundTouch/FIFOSampleBuffer.cpp \
-                soundtouch/source/SoundTouch/FIRFilter.cpp soundtouch/source/SoundTouch/cpu_detect_x86.cpp \
-                soundtouch/source/SoundTouch/RateTransposer.cpp soundtouch/source/SoundTouch/SoundTouch.cpp \
-                soundtouch/source/SoundTouch/TDStretch.cpp soundtouch/source/SoundTouch/BPMDetect.cpp soundtouch/source/SoundTouch/PeakFinder.cpp
+LOCAL_SRC_FILES := soundtouch-jni.cpp soundtouch/AAFilter.cpp  soundtouch/FIFOSampleBuffer.cpp \
+                soundtouch/FIRFilter.cpp soundtouch/cpu_detect_x86.cpp \
+                soundtouch/sse_optimized.cpp \
+                soundtouch/RateTransposer.cpp soundtouch/SoundTouch.cpp \
+                soundtouch/InterpolateCubic.cpp soundtouch/InterpolateLinear.cpp \
+                soundtouch/InterpolateShannon.cpp soundtouch/TDStretch.cpp \
+                soundtouch/BPMDetect.cpp soundtouch/PeakFinder.cpp
 
 # for native audio
-LOCAL_LDLIBS    += -lgcc 
-LOCAL_C_INCLUDES += $(LOCAL_PATH)/soundtouch/include
-# --whole-archive -lgcc 
+LOCAL_SHARED_LIBRARIES += -lgcc
+# --whole-archive -lgcc
 # for logging
 LOCAL_LDLIBS    += -llog
 # for native asset manager
 #LOCAL_LDLIBS    += -landroid
-# don't export all symbols
-# added "-marm" switch to use arm instruction set instead of thumb for improved calculation performance.
-LOCAL_CFLAGS += -Wall -fvisibility=hidden -I soundtouch/source/../include -D ST_NO_EXCEPTION_HANDLING -fdata-sections -ffunction-sections -marm
+
+# Custom Flags:
+# -fvisibility=hidden : don't export all symbols
+LOCAL_CFLAGS += -fvisibility=hidden -I soundtouch/include -fdata-sections -ffunction-sections
+
+# OpenMP mode : enable these flags to enable using OpenMP for parallel computation
+#LOCAL_CFLAGS += -fopenmp
+#LOCAL_LDFLAGS += -fopenmp
+
+
+# Use ARM instruction set instead of Thumb for improved calculation performance in ARM CPUs
+LOCAL_ARM_MODE := arm
 
 include $(BUILD_SHARED_LIBRARY)

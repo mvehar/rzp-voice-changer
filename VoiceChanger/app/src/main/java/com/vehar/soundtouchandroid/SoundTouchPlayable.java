@@ -1,12 +1,13 @@
-package com.smp.soundtouchandroid;
+package com.vehar.soundtouchandroid;
 
-import static com.smp.soundtouchandroid.Constants.*;
-
-import java.io.IOException;
 import android.media.AudioFormat;
 import android.media.AudioManager;
 import android.media.AudioTrack;
 import android.os.Build;
+
+import java.io.IOException;
+
+import static com.vehar.soundtouchandroid.Constants.BUFFER_SIZE_TRACK;
 
 public class SoundTouchPlayable implements Runnable
 {
@@ -65,7 +66,7 @@ public class SoundTouchPlayable implements Runnable
 		{
 			playFile();
 		}
-		catch (com.smp.soundtouchandroid.DecoderException e)
+		catch (com.vehar.soundtouchandroid.DecoderException e)
 		{
 			e.printStackTrace();
 		}
@@ -112,7 +113,7 @@ public class SoundTouchPlayable implements Runnable
 
 	}
 
-	private void playFile() throws com.smp.soundtouchandroid.DecoderException
+	private void playFile() throws com.vehar.soundtouchandroid.DecoderException
 	{
 		byte[] input = null;
 		int bytesReceived = 0;
@@ -136,7 +137,7 @@ public class SoundTouchPlayable implements Runnable
 		while (bytesReceived > 0);
 	}
 
-	private byte[] processChunk() throws com.smp.soundtouchandroid.DecoderException
+	private byte[] processChunk() throws com.vehar.soundtouchandroid.DecoderException
 	{
 		
 		byte[] input;
@@ -167,7 +168,7 @@ public class SoundTouchPlayable implements Runnable
 	}
 
 	// TODO code duplication...refactor?
-	private int processChunkForInt() throws com.smp.soundtouchandroid.DecoderException
+	private int processChunkForInt() throws com.vehar.soundtouchandroid.DecoderException
 	{
 		byte[] input;
 		int bytesReceived = 0;

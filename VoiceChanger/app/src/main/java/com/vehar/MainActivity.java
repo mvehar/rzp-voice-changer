@@ -1,4 +1,4 @@
-package net.surina;
+package com.vehar;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-import net.surina.soundtouchexample.R;
+import com.vehar.soundtouchandroid.R;
 
 public class MainActivity extends AppCompatActivity implements OnClickListener {
 
@@ -32,16 +32,16 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     public void onClick(View arg0) {
         Intent intent;
 
-        switch (arg0.getId()) {
-            case R.id.buttonTest:
-                intent = new Intent(this, VoiceChanger.class);
-                startActivity(intent);
+        int i = arg0.getId();
+        if (i == R.id.buttonTest) {
+            intent = new Intent(this, VoiceChanger.class);
+            startActivity(intent);
 
-                break;
-            case R.id.buttonSend:
-                intent = new Intent(this, SendClient.class);
-                startActivity(intent);
-                break;
+
+        } else if (i == R.id.buttonSend) {
+            intent = new Intent(this, SendClient.class);
+            startActivity(intent);
+
         }
     }
 }

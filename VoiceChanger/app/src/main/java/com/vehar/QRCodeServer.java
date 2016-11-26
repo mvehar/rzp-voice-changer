@@ -1,4 +1,4 @@
-package net.surina;
+package com.vehar;
 
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -13,8 +13,7 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
-
-import net.surina.soundtouchexample.R;
+import com.vehar.soundtouchandroid.R;
 
 import java.net.InetAddress;
 import java.net.NetworkInterface;

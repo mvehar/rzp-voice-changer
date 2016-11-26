@@ -1,0 +1,50 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+
+    <SeekBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/pitchBar"
+        android:layout_weight="0.02"
+        android:max="20" />
+
+    <Button
+        android:text="Record"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonRecord"
+        android:onClick="onClick"
+        android:layout_weight="0.02" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="85dp">
+
+        <Button
+            android:text="Original"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonPlayOriginal"
+            android:layout_weight="1"
+            android:onClick="onClick"
+            android:enabled="false" />
+
+        <Button
+            android:text="Processed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonPlayProcessed"
+            android:layout_weight="1"
+            android:onClick="onClick"
+            android:editable="false"
+            android:enabled="true" />
+
+    </LinearLayout>
+
+</LinearLayout>
