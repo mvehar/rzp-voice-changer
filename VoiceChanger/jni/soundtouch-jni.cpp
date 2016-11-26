@@ -64,7 +64,7 @@ static int putQueueInChar(jbyte*, queue<signed char>*, int);
 
 #ifdef __cplusplus
 
-extern "C" DLL_PUBLIC void Java_com_vehar_soundtouchandroid_SoundTouch_clearBytes(JNIEnv *env,
+extern "C" DLL_PUBLIC void Java_com_vehar_SoundTouch_clearBytes(JNIEnv *env,
 	jobject thiz, jint track)
 {
 	SoundTouchExt& soundTouch = sProcessors.at(track);
@@ -85,14 +85,14 @@ extern "C" DLL_PUBLIC void Java_com_vehar_soundtouchandroid_SoundTouch_clearByte
 	}
 }
 
-extern "C" DLL_PUBLIC void Java_com_vehar_soundtouchandroid_SoundTouch_setup(JNIEnv *env,
+extern "C" DLL_PUBLIC void Java_com_vehar_SoundTouch_setup(JNIEnv *env,
 	jobject thiz, jint track, jint channels, jint samplingRate, jint bytesPerSample, jfloat tempo, jint pitchSemi)
 {
 	SoundTouchExt& soundTouch = sProcessors.at(track);
 	setup(soundTouch, channels, samplingRate, bytesPerSample, tempo, pitchSemi);
 }
 
-extern "C" DLL_PUBLIC void Java_com_vehar_soundtouchandroid_SoundTouch_finish(JNIEnv *env,
+extern "C" DLL_PUBLIC void Java_com_vehar_SoundTouch_finish(JNIEnv *env,
 	jobject thiz, jint track,
 	int length)
 {
@@ -109,7 +109,7 @@ extern "C" DLL_PUBLIC void Java_com_vehar_soundtouchandroid_SoundTouch_finish(JN
 	delete[] fBufferIn;
 	fBufferIn = NULL;
 }
-extern "C" DLL_PUBLIC void Java_com_vehar_soundtouchandroid_SoundTouch_putBytes(JNIEnv *env,
+extern "C" DLL_PUBLIC void Java_com_vehar_SoundTouch_putBytes(JNIEnv *env,
 	jobject thiz,
 	jint track,
 	jbyteArray input,
@@ -140,7 +140,7 @@ extern "C" DLL_PUBLIC void Java_com_vehar_soundtouchandroid_SoundTouch_putBytes(
 	fBufferIn = NULL;
 }
 
-extern "C" DLL_PUBLIC jint Java_com_vehar_soundtouchandroid_SoundTouch_getBytes(JNIEnv *env,
+extern "C" DLL_PUBLIC jint Java_com_vehar_SoundTouch_getBytes(JNIEnv *env,
 	jobject thiz, jint track, jbyteArray get, jint toGet)
 {
 	queue<signed char>* fBufferOut = sProcessors.at(track).fBufferOut;

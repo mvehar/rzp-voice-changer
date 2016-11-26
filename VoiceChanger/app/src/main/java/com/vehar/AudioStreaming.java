@@ -6,8 +6,6 @@ import android.media.AudioRecord;
 import android.media.AudioTrack;
 import android.media.MediaRecorder;
 
-import com.vehar.soundtouchandroid.SoundTouch;
-
 import java.util.ArrayList;
 import java.util.List;
 

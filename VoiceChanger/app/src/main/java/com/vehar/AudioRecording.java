@@ -6,8 +6,6 @@ import android.media.AudioRecord;
 import android.media.AudioTrack;
 import android.media.MediaRecorder;
 
-import com.vehar.soundtouchandroid.SoundTouch;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -94,12 +92,20 @@ public class AudioRecording {
         track.stop();
         track.flush();
 
-        byte[] sound = new byte[SOUNDS.size()];
-        for(int i=0;i<sound.length;i++){
-            sound[i] = SOUNDS.get(i);
-        }
-        track.play();
-        track.write(sound,0,sound.length);
+        new Thread(new Runnable() {
+
+            public void run() {
+                byte[] sound = new byte[SOUNDS.size()];
+                for(int i=0;i<sound.length;i++){
+                    sound[i] = SOUNDS.get(i);
+                }
+                track.play();
+                track.write(sound,0,sound.length);
+
+            }
+        }, "AudioRecorder Play Thread").start();
+
+
 
     }
 
