@@ -6,114 +6,7 @@
     </shared>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="05a7f2da-367e-40ad-ac24-df06d1271498" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/res/layouts/activity_example.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/res/layouts/activity_main.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/res/layouts/activity_qrcode.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/res/layouts/activity_send.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/jni/soundtouch/config/README.TXT" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/jni/soundtouch/config/am_include.mk" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/jni/soundtouch/source/Android-lib/README-SoundTouch-Android.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/jni/soundtouch/source/Android-lib/jni/Android.mk" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/jni/soundtouch/source/Android-lib/jni/Application.mk" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/jni/soundtouch/source/Android-lib/jni/bm.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/jni/soundtouch/source/Android-lib/libs/armeabi-v7a/libsoundtouch.so" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/jni/soundtouch/source/Android-lib/src/net/surina/soundtouch/SoundTouch.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/jni/soundtouch/source/Makefile.am" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/jni/soundtouch/source/SoundStretch/Makefile.am" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/jni/soundtouch/source/SoundStretch/RunParameters.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/jni/soundtouch/source/SoundStretch/RunParameters.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/jni/soundtouch/source/SoundStretch/WavFile.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/jni/soundtouch/source/SoundStretch/WavFile.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/jni/soundtouch/source/SoundStretch/main.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/jni/soundtouch/source/SoundStretch/soundstretch.dsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/jni/soundtouch/source/SoundStretch/soundstretch.dsw" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/jni/soundtouch/source/SoundStretch/soundstretch.sln" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/jni/soundtouch/source/SoundStretch/soundstretch.vcproj" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/jni/soundtouch/source/SoundStretch/soundstretch.vcxproj" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/jni/soundtouch/source/SoundStretch/soundstretch.vcxproj.filters" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/jni/soundtouch/source/SoundTouch/AAFilter.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/jni/soundtouch/source/SoundTouch/AAFilter.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/jni/soundtouch/source/SoundTouch/BPMDetect.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/jni/soundtouch/source/SoundTouch/FIFOSampleBuffer.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/jni/soundtouch/source/SoundTouch/FIRFilter.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/jni/soundtouch/source/SoundTouch/FIRFilter.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/jni/soundtouch/source/SoundTouch/Makefile.am" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/jni/soundtouch/source/SoundTouch/PeakFinder.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/jni/soundtouch/source/SoundTouch/PeakFinder.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/jni/soundtouch/source/SoundTouch/RateTransposer.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/jni/soundtouch/source/SoundTouch/RateTransposer.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/jni/soundtouch/source/SoundTouch/SoundTouch.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/jni/soundtouch/source/SoundTouch/SoundTouch.dsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/jni/soundtouch/source/SoundTouch/SoundTouch.dsw" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/jni/soundtouch/source/SoundTouch/SoundTouch.sln" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/jni/soundtouch/source/SoundTouch/SoundTouch.vcproj" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/jni/soundtouch/source/SoundTouch/SoundTouch.vcxproj" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/jni/soundtouch/source/SoundTouch/SoundTouch.vcxproj.filters" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/jni/soundtouch/source/SoundTouch/TDStretch.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/jni/soundtouch/source/SoundTouch/TDStretch.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/jni/soundtouch/source/SoundTouch/cpu_detect.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/jni/soundtouch/source/SoundTouch/cpu_detect_x86.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/jni/soundtouch/source/SoundTouch/mmx_optimized.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/jni/soundtouch/source/SoundTouch/sse_optimized.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/jni/soundtouch/source/SoundTouchDLL/SoundTouchDLL.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/jni/soundtouch/source/SoundTouchDLL/SoundTouchDLL.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/jni/soundtouch/source/SoundTouchDLL/SoundTouchDLL.pas" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/jni/soundtouch/source/SoundTouchDLL/SoundTouchDLL.rc" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/jni/soundtouch/source/SoundTouchDLL/SoundTouchDLL.sln" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/jni/soundtouch/source/SoundTouchDLL/SoundTouchDLL.vcproj" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/jni/soundtouch/source/SoundTouchDLL/resource.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../test/app/src/main/java/net/surina/soundtouch/SoundTouch.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/cache.properties.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileHashes.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshots.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshotsToTreeSnapshotsIndex.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshotsToTreeSnapshotsIndex.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/taskArtifacts.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libs/armeabi-v7a/libsoundtouch.so" afterPath="$PROJECT_DIR$/libs/armeabi-v7a/libsoundtouch.so" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/core_3_3_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/core_3_3_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_annotations_23_4_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_annotations_23_4_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/VoiceChanger.iml" afterPath="$PROJECT_DIR$/VoiceChanger.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build.gradle" afterPath="$PROJECT_DIR$/app/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/vehar/AudioRecording.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/vehar/AudioRecording.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/vehar/AudioStreaming.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/vehar/AudioStreaming.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/vehar/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/vehar/MainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/vehar/QRCodeServer.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/vehar/QRCodeServer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/vehar/SendClient.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/vehar/SendClient.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/vehar/VoiceChanger.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/vehar/VoiceChanger.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/vehar/soundtouchandroid/Constants.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/vehar/soundtouchandroid/Constants.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/vehar/soundtouchandroid/DecoderException.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/vehar/soundtouchandroid/DecoderException.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/vehar/soundtouchandroid/JLayerMp3Decoder.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/vehar/soundtouchandroid/JLayerMp3Decoder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/vehar/soundtouchandroid/MediaCodecMp3Decoder.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/vehar/soundtouchandroid/MediaCodecMp3Decoder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/vehar/soundtouchandroid/Mp3Decoder.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/vehar/soundtouchandroid/Mp3Decoder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/vehar/soundtouchandroid/SoundTouch.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/vehar/soundtouchandroid/SoundTouch.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/vehar/soundtouchandroid/SoundTouchPlayable.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/vehar/soundtouchandroid/SoundTouchPlayable.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jni/Android.mk" afterPath="$PROJECT_DIR$/jni/Android.mk" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jni/Application.mk" afterPath="$PROJECT_DIR$/jni/Application.mk" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jni/soundtouch-jni.cpp" afterPath="$PROJECT_DIR$/jni/soundtouch-jni.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jni/soundtouch/COPYING.TXT" afterPath="$PROJECT_DIR$/jni/soundtouch/COPYING.TXT" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jni/soundtouch/Makefile.am" afterPath="$PROJECT_DIR$/jni/soundtouch/Makefile.am" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jni/soundtouch/README.html" afterPath="$PROJECT_DIR$/jni/soundtouch/README.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jni/soundtouch/bootstrap" afterPath="$PROJECT_DIR$/jni/soundtouch/bootstrap" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jni/soundtouch/configure-file-README.txt" afterPath="$PROJECT_DIR$/jni/soundtouch/configure-file-README.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jni/soundtouch/configure.ac" afterPath="$PROJECT_DIR$/jni/soundtouch/configure.ac" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jni/soundtouch/include/BPMDetect.h" afterPath="$PROJECT_DIR$/jni/soundtouch/include/BPMDetect.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jni/soundtouch/include/FIFOSampleBuffer.h" afterPath="$PROJECT_DIR$/jni/soundtouch/include/FIFOSampleBuffer.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jni/soundtouch/include/FIFOSamplePipe.h" afterPath="$PROJECT_DIR$/jni/soundtouch/include/FIFOSamplePipe.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jni/soundtouch/include/Makefile.am" afterPath="$PROJECT_DIR$/jni/soundtouch/include/Makefile.am" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jni/soundtouch/include/STTypes.h" afterPath="$PROJECT_DIR$/jni/soundtouch/include/STTypes.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jni/soundtouch/include/SoundTouch.h" afterPath="$PROJECT_DIR$/jni/soundtouch/include/SoundTouch.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jni/soundtouch/make-win.bat" afterPath="$PROJECT_DIR$/jni/soundtouch/make-win.bat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jni/soundtouch/soundtouch-1.4.pc.in" afterPath="$PROJECT_DIR$/jni/soundtouch/soundtouch-1.4.pc.in" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jni/soundtouch/soundtouch.m4" afterPath="$PROJECT_DIR$/jni/soundtouch/soundtouch.m4" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jni/soundtouch/soundtouch.pc.in" afterPath="$PROJECT_DIR$/jni/soundtouch/soundtouch.pc.in" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../test/app/app.iml" afterPath="$PROJECT_DIR$/../test/app/app.iml" />
-    </list>
+    <list default="true" id="05a7f2da-367e-40ad-ac24-df06d1271498" name="Default" comment="" />
     <ignored path="VoiceChanger.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -182,8 +75,8 @@
       <file leaf-file-name="SendClient.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/vehar/SendClient.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="595">
-              <caret line="67" column="41" selection-start-line="67" selection-start-column="41" selection-end-line="67" selection-end-column="41" />
+            <state relative-caret-position="-201">
+              <caret line="53" column="45" selection-start-line="53" selection-start-column="45" selection-end-line="53" selection-end-column="45" />
               <folding />
             </state>
           </provider>
@@ -2401,7 +2294,7 @@
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39977974" sideWeight="0.4957265" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32929516" sideWeight="0.49358973" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32929516" sideWeight="0.49358973" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -2862,8 +2755,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/vehar/SendClient.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="595">
-          <caret line="67" column="41" selection-start-line="67" selection-start-column="41" selection-end-line="67" selection-end-column="41" />
+        <state relative-caret-position="-201">
+          <caret line="53" column="45" selection-start-line="53" selection-start-column="45" selection-end-line="53" selection-end-column="45" />
           <folding />
         </state>
       </provider>
