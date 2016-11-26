@@ -4,6 +4,8 @@
 
 *.pydevproject
 .project
+.idea/
+.gradle/
 .metadata
 bin/
 tmp/
