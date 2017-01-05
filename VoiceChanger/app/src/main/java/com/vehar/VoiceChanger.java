@@ -150,6 +150,7 @@ public class VoiceChanger extends AppCompatActivity implements OnClickListener {
     private boolean Permissions() {
         int permissionWRITE_EXTERNAL_STORAGE = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
         int permissionRECORD = ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO);
+        int permissionWIFI = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_WIFI_STATE);
         List<String> listPermissionsNeeded = new ArrayList<String>();
 
         if (permissionWRITE_EXTERNAL_STORAGE != PackageManager.PERMISSION_GRANTED) {
@@ -157,6 +158,10 @@ public class VoiceChanger extends AppCompatActivity implements OnClickListener {
         }
         if (permissionRECORD != PackageManager.PERMISSION_GRANTED) {
             listPermissionsNeeded.add(Manifest.permission.RECORD_AUDIO);
+        }
+
+        if (permissionWIFI != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(Manifest.permission.ACCESS_WIFI_STATE);
         }
 
         if (!listPermissionsNeeded.isEmpty()) {

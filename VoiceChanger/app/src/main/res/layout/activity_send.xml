@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.vehar.SendClient">
+    tools:context="com.vehar.Communicator">
 
     <TextView
         android:text="Select mode."
@@ -18,6 +18,16 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
         android:id="@+id/textMode" />
+
+    <TextView
+        android:text=""
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textMode"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:id="@+id/sendStat" />
+
 
     <LinearLayout
         android:orientation="horizontal"
@@ -44,12 +54,20 @@
             android:layout_weight="1" />
 
     </LinearLayout>
+    <SeekBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/pitchBar"
+        android:layout_below="@+id/sendStat"
+        android:visibility="invisible"
+        android:layout_weight="0.02"
+        android:max="20" />
 
     <Button
-        android:text="Button"
+        android:text="Send recording"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/textMode"
+        android:layout_below="@+id/pitchBar"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="84dp"
         android:id="@+id/buttonStartSending"

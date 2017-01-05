@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
 
 
         } else if (i == R.id.buttonSend) {
-            intent = new Intent(this, SendClient.class);
+            intent = new Intent(this, Communicator.class);
             startActivity(intent);
 
         }

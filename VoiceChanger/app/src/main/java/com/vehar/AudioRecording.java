@@ -39,10 +39,10 @@ public class AudioRecording {
         bufferSize = AudioRecord.getMinBufferSize(RECORDER_SAMPLERATE,
                 RECORDER_CHANNELS, RECORDER_AUDIO_ENCODING);
 
-        track = new AudioTrack(AudioManager.STREAM_MUSIC, RECORDER_SAMPLERATE , RECORDER_CHANNELS,
+        track = new AudioTrack(AudioManager.STREAM_MUSIC, RECORDER_SAMPLERATE, RECORDER_CHANNELS,
                 RECORDER_AUDIO_ENCODING, BufferElements2Rec * BytesPerElement, AudioTrack.MODE_STREAM);
 
-        st = new SoundTouch(0,2,RECORDER_SAMPLERATE,2,1.0f,5);
+        st = new SoundTouch(0, 2, RECORDER_SAMPLERATE, 2, 1.0f, 5);
 
     }
 
@@ -52,7 +52,7 @@ public class AudioRecording {
                 RECORDER_SAMPLERATE, RECORDER_CHANNELS,
                 RECORDER_AUDIO_ENCODING, BufferElements2Rec * BytesPerElement);
 
-        st = new SoundTouch(0,2,RECORDER_SAMPLERATE,BytesPerElement,1.0f,pitch);
+        st = new SoundTouch(0, 2, RECORDER_SAMPLERATE, BytesPerElement, 1.0f, pitch);
 
 
         SOUNDS.clear();
@@ -88,28 +88,22 @@ public class AudioRecording {
         }
     }
 
-    public void playOriginal(){
+    public void playOriginal() {
         track.stop();
         track.flush();
 
-        new Thread(new Runnable() {
-
-            public void run() {
-                byte[] sound = new byte[SOUNDS.size()];
-                for(int i=0;i<sound.length;i++){
-                    sound[i] = SOUNDS.get(i);
-                }
-                track.play();
-                track.write(sound,0,sound.length);
-
-            }
-        }, "AudioRecorder Play Thread").start();
-
+        byte[] sound = new byte[SOUNDS.size()];
+        for (int i = 0; i < sound.length; i++) {
+            sound[i] = SOUNDS.get(i);
+        }
+        track.play();
+        track.write(sound, 0, sound.length);
 
 
     }
 
-    public void playProcessed(){
+
+    public void playProcessed() {
         track.stop();
         track.flush();
 
@@ -117,25 +111,25 @@ public class AudioRecording {
         st.finish();
 
         byte[] processed = new byte[BufferElements2Rec];
-        int st_proc  = 0;
+        int st_proc = 0;
         do {
             st_proc = st.getBytes(processed);
-            for(int i=0;i<st_proc;i++){
+            for (int i = 0; i < st_proc; i++) {
                 PROC_SOUNDS.add(processed[i]);
             }
-        }while(st_proc!=0);
+        } while (st_proc != 0);
 
 
         byte[] sound = new byte[PROC_SOUNDS.size()];
-        for(int i=0;i<PROC_SOUNDS.size();i++){
+        for (int i = 0; i < PROC_SOUNDS.size(); i++) {
             sound[i] = PROC_SOUNDS.get(i);
         }
         track.play();
-        track.write(sound,0,sound.length);
+        track.write(sound, 0, sound.length);
 
     }
 
-    public void stop(){
+    public void stop() {
         track.stop();
         track.flush();
 
@@ -151,10 +145,10 @@ public class AudioRecording {
             // gets the voice output from microphone to byte format
             recorder.read(sData, 0, BufferElements2Rec);
 
-           // track.write(sData,0,BufferElements2Rec);
+            // track.write(sData,0,BufferElements2Rec);
 
             //Copy to array
-            for(int i=0;i<BufferElements2Rec;i++){
+            for (int i = 0; i < BufferElements2Rec; i++) {
                 SOUNDS.add(sData[i]);
             }
 
@@ -163,7 +157,7 @@ public class AudioRecording {
             int st_proc = st.getBytes(sData);
             //track.write(sData,0,st_proc);
 
-            for(int i=0;i<st_proc;i++){
+            for (int i = 0; i < st_proc; i++) {
                 PROC_SOUNDS.add(sData[i]);
             }
 
