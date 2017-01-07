@@ -14,6 +14,8 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.vehar.soundtouchandroid.R;
 
+import java.io.IOException;
+
 public class Communicator extends AppCompatActivity implements OnClickListener {
 
     Button buttonQR = null;
@@ -30,7 +32,7 @@ public class Communicator extends AppCompatActivity implements OnClickListener {
     private int PORT = 6767;
 
     //
-    AudioStreaming streamer = null;
+    AudioStreamingTwoWay streamer = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +46,7 @@ public class Communicator extends AppCompatActivity implements OnClickListener {
         sendStat = (TextView) findViewById(R.id.sendStat);
         pitchBar = (SeekBar) findViewById(R.id.pitchBar);
 
-        streamer = new AudioStreaming(sendStat);
+        streamer = new AudioStreamingTwoWay(sendStat);
 
     }
 
@@ -54,7 +56,7 @@ public class Communicator extends AppCompatActivity implements OnClickListener {
         System.out.println("Stopping..");
 
         if(streamer != null){
-            streamer.stopStreaming();
+            streamer.stop();
         }
 
         super.onDestroy();
@@ -81,12 +83,16 @@ public class Communicator extends AppCompatActivity implements OnClickListener {
                 //TODO: Stop sending
                 Toast.makeText(this, "Stopping...", Toast.LENGTH_SHORT).show();
 
-                streamer.stopStreaming();
+                streamer.stop();
                 isSending = !isSending;
             } else {
                 Toast.makeText(this, "Starting...", Toast.LENGTH_SHORT).show();
 
-                streamer.startStreaming(IP, PORT, pitchBar.getProgress()-10, this);
+                try {
+                    streamer.startStreamingTransfer(IP, PORT, pitchBar.getProgress()-10, this);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 isSending = !isSending;
             }
 

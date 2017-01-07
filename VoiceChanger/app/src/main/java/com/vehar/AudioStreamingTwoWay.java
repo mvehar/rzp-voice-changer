@@ -55,27 +55,34 @@ public class AudioStreamingTwoWay {
         TWO WAY .....................
      */
 
-    private boolean startListeningTransfer(final Activity activity,final int pitch) throws IOException {
+    public boolean startListeningTransfer(final Activity activity,final int pitch) throws IOException {
         if(TRANSFER) return false;
         parentActivity = activity;
-
-        ServerSocket socket = new ServerSocket(PORT);
-
-        System.out.println("Waiting for client...");
-        client = socket.accept();
-        socket.close();
-
-        System.out.println("Client connected.");
-        updateLabel("Client connected.");
-
-        TRANSFER = true;
 
         //Run thread for listener first - streamer second
         Thread thread1 = new Thread(new Runnable() {
 
             public void run() {
                 try {
+                    ServerSocket socket = new ServerSocket(PORT);
+
+                    System.out.println("Waiting for client...");
+                    client = socket.accept();
+                    socket.close();
+
+                    System.out.println("Client connected.");
+                    updateLabel("Client connected.");
+
+                    TRANSFER = true;
+
                     transfer(pitch);
+
+                    //Stop listening stream
+                    if(client.isConnected())
+                        client.close();
+                    updateLabel("Disconnected.");
+
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -86,34 +93,35 @@ public class AudioStreamingTwoWay {
         thread1.start();
 
 
-        //Stop listening stream
-        if(client.isConnected())
-            client.close();
-        updateLabel("Disconnected.");
 
         return true;
     }
 
-    private boolean startStreamingTransfer(String ip, int port,final int pitch, final Activity activity) throws IOException {
+    public boolean startStreamingTransfer(String ip, int port,final int pitch, final Activity activity) throws IOException {
 
         if(TRANSFER) return false;
         parentActivity = activity;
         IP = ip;
         PORT = port;
 
-        client = new Socket(IP, PORT);
-
-        System.out.println("Client connected.");
-        updateLabel("Client connected.");
-
-        TRANSFER = true;
-
         //Run thread for listener first - streamer second
         Thread thread1 = new Thread(new Runnable() {
 
             public void run() {
                 try {
+                    client = new Socket(IP, PORT);
+                    TRANSFER = true;
+
+                    System.out.println("Client connected.");
+                    updateLabel("Client connected.");
+
                     transfer(pitch);
+
+                    //Stop listening stream
+                    if(client.isConnected())
+                        client.close();
+                    updateLabel("Disconnected.");
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -124,12 +132,13 @@ public class AudioStreamingTwoWay {
         thread1.start();
 
 
-        //Stop listening stream
-        if(client.isConnected())
-            client.close();
-        updateLabel("Disconnected.");
+
 
         return true;
+    }
+
+    public void stop(){
+        TRANSFER = false;
     }
 
     private void transfer(int pitch) throws IOException {
@@ -164,7 +173,12 @@ public class AudioStreamingTwoWay {
             recorder.read(data, 0, BufferElements2Rec);
             st.putBytes(data);
             int st_proc = st.getBytes(data);
-            out.write(data, 0, st_proc);
+
+            //Send 0 if no samples proccessed
+            if(st_proc == 0)
+                out.write(new byte[1024],0, 1024);
+            else
+                out.write(data, 0, st_proc);
             out.flush();
 
             System.out.println("Sending: "+st_proc);

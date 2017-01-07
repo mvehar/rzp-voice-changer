@@ -19,6 +19,7 @@ import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import com.vehar.soundtouchandroid.R;
 
+import java.io.IOException;
 import java.util.Hashtable;
 
 public class QRCodeServer extends AppCompatActivity {
@@ -33,7 +34,7 @@ public class QRCodeServer extends AppCompatActivity {
     int BytesPerElement = 2; // 2 bytes in 16bit format
     int bufferSize = 0;
 
-    AudioStreaming listener = null;
+    AudioStreamingTwoWay listener = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,8 +60,12 @@ public class QRCodeServer extends AppCompatActivity {
         } catch (WriterException e) {
             e.printStackTrace();
         }
-        listener = new AudioStreaming(stat);
-        listener.listen(this);
+        listener = new AudioStreamingTwoWay(stat);
+        try {
+            listener.startListeningTransfer(this,1);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -69,7 +74,7 @@ public class QRCodeServer extends AppCompatActivity {
         System.out.println("Stopping..");
 
         if(listener!= null){
-            listener.stopListening();
+            listener.stop();
         }
 
         super.onDestroy();
@@ -97,7 +102,7 @@ public class QRCodeServer extends AppCompatActivity {
 
 
     public String getLocalIpAddress() {
-        String ip = "";
+        // String ip = "";
 
         WifiManager wifiMgr = (WifiManager) getSystemService(WIFI_SERVICE);
         WifiInfo wifiInfo = wifiMgr.getConnectionInfo();
