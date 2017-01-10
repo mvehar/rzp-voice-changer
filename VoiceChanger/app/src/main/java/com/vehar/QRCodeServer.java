@@ -20,6 +20,10 @@ import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import com.vehar.soundtouchandroid.R;
 
 import java.io.IOException;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.util.Enumeration;
 import java.util.Hashtable;
 
 public class QRCodeServer extends AppCompatActivity {
@@ -102,31 +106,35 @@ public class QRCodeServer extends AppCompatActivity {
 
 
     public String getLocalIpAddress() {
-        // String ip = "";
+        String ip = "";
 
         WifiManager wifiMgr = (WifiManager) getSystemService(WIFI_SERVICE);
         WifiInfo wifiInfo = wifiMgr.getConnectionInfo();
         int ipaddr = wifiInfo.getIpAddress();
-        String ipAddress = Formatter.formatIpAddress(ipaddr);
-        System.out.println("Found IP: "+ipAddress);
 
-        return ipAddress;
+        if(ipaddr>0){
+            ip =     Formatter.formatIpAddress(ipaddr);
 
-//        try {
-//            for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements();) {
-//                NetworkInterface intf = en.nextElement();
-//                for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements();) {
-//                    InetAddress inetAddress = enumIpAddr.nextElement();
-//                    if (!inetAddress.isLoopbackAddress()) {
-//                        ip = Formatter.formatIpAddress(inetAddress.hashCode());
-//                        System.out.println("Found IP: "+ip);
-//
-//                    }
-//                }
-//            }
-//        } catch (SocketException ex) {
-//            ex.printStackTrace();
-//        }
-//        return ip;
+            System.out.println("Found Wifi IP: "+ip);
+            return ip;
+        }
+
+
+        try {
+            for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements();) {
+                NetworkInterface intf = en.nextElement();
+                for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements();) {
+                    InetAddress inetAddress = enumIpAddr.nextElement();
+                    if (!inetAddress.isLoopbackAddress()) {
+                        ip = Formatter.formatIpAddress(inetAddress.hashCode());
+                        System.out.println("Found IP: "+ip);
+
+                    }
+                }
+            }
+        } catch (SocketException ex) {
+            ex.printStackTrace();
+        }
+        return ip;
     }
 }
